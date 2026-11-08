@@ -1,0 +1,170 @@
+HTML
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YVANN HUB</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1220;
+  color: white;
+}
+
+header {
+  padding: 25px;
+  background: #142238;
+  text-align: center;
+}
+
+header h1 {
+  color: #65e6bd;
+  font-size: 30px;
+}
+
+.hero {
+  text-align: center;
+  padding: 55px 20px;
+}
+
+.hero h2 {
+  font-size: 35px;
+}
+
+.hero p {
+  color: #b6c4d8;
+}
+
+.tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  background: #17263c;
+  padding: 22px;
+  border-radius: 15px;
+  border: 1px solid #30445f;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  background: #65e6bd;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.result {
+  color: #65e6bd;
+  margin-top: 12px;
+  overflow-wrap: anywhere;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #aab8cc;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>YVANN HUB</h1>
+  <p>Ton univers numérique</p>
+</header>
+
+<section class="hero">
+  <h2>Bienvenue sur YVANN HUB</h2>
+  <p>Découvre des outils simples pour faciliter ton quotidien.</p>
+</section>
+
+<section class="tools">
+
+  <div class="card">
+    <h3>Calculatrice</h3>
+    <input id="number1" type="number" placeholder="Premier nombre">
+    <input id="number2" type="number" placeholder="Deuxième nombre">
+    <button onclick="calculate()">Additionner</button>
+    <div class="result" id="answer"></div>
+  </div>
+
+  <div class="card">
+    <h3>Compteur de mots</h3>
+    <textarea id="words" placeholder="Écris ton texte ici..." oninput="countWords()"></textarea>
+    <div class="result" id="count">0 mot</div>
+  </div>
+
+  <div class="card">
+    <h3>Bloc-notes</h3>
+    <textarea id="notes" placeholder="Écris tes idées..."></textarea>
+    <button onclick="saveNotes()">Enregistrer</button>
+    <div class="result" id="saved"></div>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 YVANN HUB - Tous droits réservés.
+</footer>
+
+<script>
+function calculate() {
+  let a = Number(document.getElementById("number1").value);
+  let b = Number(document.getElementById("number2").value);
+
+  document.getElementById("answer").textContent =
+    "Résultat : " + (a + b);
+}
+
+function countWords() {
+  let text = document.getElementById("words").value.trim();
+  let count = text ? text.split(/\s+/).length : 0;
+
+  document.getElementById("count").textContent =
+    count + " mot(s)";
+}
+
+function saveNotes() {
+  let note = document.getElementById("notes").value;
+
+  try {
+    localStorage.setItem("yvann_notes", note);
+    document.getElementById("saved").textContent =
+      "Note enregistrée !";
+  } catch {
+    document.getElementById("saved").textContent =
+      "Enregistrement indisponible.";
+  }
+}
+
+try {
+  document.getElementById("notes").value =
+    localStorage.getItem("yvann_notes") || "";
+} catch {}
+</script>
+
+</body>
+    </html>
